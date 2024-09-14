@@ -1,0 +1,21 @@
+# Use the official Jupyter Docker image
+FROM jupyter/base-notebook
+
+# Switch to root to install wget
+USER root
+
+# Install wget (if needed in the future)
+RUN apt-get update && apt-get install -y wget
+
+# Copy the start script and set permissions
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+# Switch back to the default non-root user (jovyan)
+USER $NB_UID
+
+# Expose JupyterLab on port 8888
+EXPOSE 8888
+
+# Start JupyterLab using the custom script
+CMD ["/usr/local/bin/start.sh"]
