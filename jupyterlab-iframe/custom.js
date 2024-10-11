@@ -4,7 +4,7 @@ console.log("Custom JS loaded successfully!");
 // Use Jupyter's event system to ensure the notebook is fully loaded
 require(["base/js/events"], function (events) {
   events.on("kernel_ready.Kernel", function () {
-    console.log("Notebook initialized!");
+    console.log("Notebook initialized!"); // lets see how this does ..
 
     // Attach click event listener to cells
     $("#notebook-container").on("click", ".cell", function (event) {

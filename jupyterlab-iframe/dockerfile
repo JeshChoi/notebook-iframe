@@ -32,3 +32,7 @@ EXPOSE 8888
 
 # Start Jupyter Notebook using the custom script
 CMD ["/usr/local/bin/start.sh"]
+
+# docker run -d -p 8888:8888 -e NOTEBOOK_URL="https://drive.google.com/uc?export=download&id=14c4DXylm9Mo46C70widLInGsqmsHDmA9" iframe-pod
+
+# 2 weeks - screen shot 
