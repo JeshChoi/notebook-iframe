@@ -10,7 +10,7 @@ mkdir -p /home/jovyan/.jupyter/custom
 # Default notebook file path
 NOTEBOOK_PATH="/home/jovyan/work/example.ipynb"
 
-# Check if the NOTEBOOK_URL or NOTEBOOK_JSON environment variables are set
+# Check if NOTEBOOK_URL or NOTEBOOK_JSON is set
 if [ ! -f "$NOTEBOOK_PATH" ]; then
     if [ ! -z "$NOTEBOOK_URL" ]; then
         echo "Downloading notebook from $NOTEBOOK_URL..."
@@ -27,11 +27,14 @@ else
     echo "Notebook already exists at $NOTEBOOK_PATH."
 fi
 
-# Set the Jupyter token (environment variable or default)
+# Set the Jupyter token
 TOKEN=${JUPYTER_TOKEN:-'mytoken'}
 echo "Starting Jupyter Notebook with token: $TOKEN"
 
-# Allow connections from any origin and set CORS headers properly
+# Start Flask API in the background
+python /home/jovyan/notebook_api.py &
+
+# Start Jupyter Notebook
 exec jupyter notebook --ip=0.0.0.0 --no-browser --NotebookApp.token="$TOKEN" \
     --NotebookApp.allow_origin='*' \
     --NotebookApp.allow_remote_access=True \
