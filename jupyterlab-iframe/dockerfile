@@ -8,7 +8,7 @@ USER root
 RUN apt-get update && apt-get install -y wget
 
 # Install required Python packages
-RUN pip install ipywidgets flask flask-cors && \
+RUN pip install ipywidgets flask flask-cors nbformat openai uuid && \
     jupyter nbextension enable --py widgetsnbextension --sys-prefix
 RUN pip install --no-cache-dir pandas scikit-learn matplotlib
 
